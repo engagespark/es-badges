@@ -9,7 +9,7 @@
 </div>
 
 <div class="possible">
-  <h2><a class="clickable" on-click="togglePossibleBadges">Possible badges {{#if displayPossibleBadges }} &#x25B2; {{else}} &#x25bc; {{/if}}</a></h2>
+  <h2><a class="clickable" on-click="togglePossibleBadges">{{ badgesDataCount }} possible badges {{#if displayPossibleBadges }} &#x25B2; {{else}} &#x25bc; {{/if}}</a></h2>
   <div class="possible-badges {{#if !displayPossibleBadges }} hide {{/if}}">
   {{#each badgesData:id}}
     <div>
@@ -167,6 +167,11 @@ engineersConfig = [
 component.exports = {
   isolated: true,
   twoway: false,
+  computed: {
+    badgesDataCount: function() {
+      return Object.keys(this.get('badgesData')).length
+    },
+  },
   data: {
     badgesData: {},
     badgeTypes: {},
