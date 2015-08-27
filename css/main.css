@@ -248,6 +248,13 @@ http://emojisymbols.com/
 .badge.firefight {
 }
 
+.badge.opensource {
+    font-size: 15px;
+}
+.badge.opensource span {
+    font-weight: bold;
+}
+
 .badge.teaching {
 }
 
