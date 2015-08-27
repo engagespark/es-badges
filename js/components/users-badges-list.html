@@ -1,0 +1,116 @@
+<div>
+  {{#each engineerBadges}}
+  <div class="engineer">
+    <div class="nickname">{{nick}}</div>
+    {{#each badges}}
+      <div class="badge {{ badgesData[id].area }} {{ badgesData[id].level }}">
+        <span title="{{ badgesData[id].id }}{{#if variant}} with {{ variant }} {{/if}}">{{{ badgesData[id].symbol }}}</span>
+      </div>
+    {{/each}}
+  </div>
+  {{/each}}
+</div>
+
+<script>
+var Levels = {
+  bronce: 'bronce',
+}
+
+var area2symbol = {
+  'system': '#',  /* &#x258a for the box */
+  'teaching': '&#x1F393;',
+}
+
+var badgesConfig = {
+  'system/standard-streams': {
+    level: Levels.bronce,
+  },
+  'teaching/challenge-created': {
+    level: Levels.bronce,
+  },
+}
+
+engineersConfig = [
+      {
+        nick: 'Diego',
+        badges: [
+          'system/standard-streams:prolog',
+          'system/standard-streams:py2',
+          'system/standard-streams:py3',
+        ]
+      },
+      {
+        nick: 'Él Mexicano',
+        badges: [
+          'system/standard-streams:go',
+          'teaching/challenge-created',
+        ]
+      },
+      {
+        nick: 'JayR',
+        badges: [
+          'system/standard-streams:py2',
+        ]
+      },
+      {
+        nick: 'Marconi',
+        badges: [
+          'system/standard-streams:go',
+          'system/standard-streams:haskell',
+        ]
+      },
+      {
+        nick: 'murat',
+        badges: [
+          'system/standard-streams:bash',
+          'system/standard-streams:commonlisp',
+        ]
+      },
+      {
+        nick: 'Ravi',
+        badges: [
+          'system/standard-streams:perl',
+        ]
+      },
+]
+
+component.exports = {
+  isolated: true,
+  twoway: false,
+  data: {
+    badgesData: {},
+    engineerBadges: []
+  },
+  oninit: function() {
+    this.set('badgesData', Object.keys(badgesConfig).reduce(function(previous, badgeId) {
+      var area;
+      var idParts = badgeId.split("/")
+
+      area = idParts[0]
+      previous[badgeId] = {
+        area: area,
+        id: idParts[1],
+        level: badgesConfig[badgeId].level,
+        symbol: area2symbol[area],
+      }
+      return previous
+    }, {}))
+    var engineerBadges = engineersConfig.map(function(engineerConfig) {
+      return {
+        badges: engineerConfig.badges.map(function(badgeId) {
+          var badgeParts = badgeId.split(':')
+          return {
+            id: badgeParts[0],
+            variant: (badgeParts.length > 1) ? badgeParts[1] : '',
+          }
+        }),
+        nick: engineerConfig.nick,
+      }
+    })
+    engineerBadges.sort(function(left, right) {
+      return right.badges.length - left.badges.length
+    })
+    this.set('engineerBadges', engineerBadges)
+  }
+}
+</script>
