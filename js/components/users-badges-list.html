@@ -1,14 +1,25 @@
 <div>
   {{#each badgeTypes:area}}
   <div class="legend">
-      <div class="badge {{ area }} bronce">
+      <div class="badge {{ area }} neutral">
         <span title="{{ area }}">{{{ badgeTypes[area] }}}</span>
       </div> <span class="openbracket">{</span> {{ area }} <span class="closebracket">}</span>
   </div>
   {{/each}}
 </div>
 
-<hr>
+<div class="possible">
+  <h2><a class="clickable" on-click="togglePossibleBadges">Possible badges {{#if displayPossibleBadges }} &#x25B2; {{else}} &#x25bc; {{/if}}</a></h2>
+  <div class="possible-badges {{#if !displayPossibleBadges }} hide {{/if}}">
+  {{#each badgesData:id}}
+    <div>
+      <div class="badge {{ badgesData[id].area }} {{ badgesData[id].level }}">
+        <span title="{{ badgesData[id].area }}">{{{ badgesData[id].symbol }}}</span>
+      </div> {{ id }}
+    </div>
+  {{/each}}
+  </div>
+</div>
 
 <div>
   {{#each engineerBadges}}
@@ -24,28 +35,40 @@
 </div>
 
 <script>
-var Levels = {
-  bronce: 'bronce',
-}
-
 var badgeTypesConfig = {
   'challenge': '&#x2328;',
+  'community': '&#x2302;',
   'firefight': '&#x1f525;', /* http://www.fileformat.info/info/unicode/char/1f525/index.htm */
   'teaching': '&#x1F393;',
 }
 
 var badgesConfig = {
-  'firefight/weekly-chief': {
-    level: Levels.bronce,
-  },
   'challenge/system-standard-streams': {
-    level: Levels.bronce,
+    level: 'bronce',
+  },
+  'community/meetup-attended': {
+    level: 'bronce',
+  },
+  'community/meetup-talk': {
+    level: 'silver',
+  },
+  'community/meetup-organized': {
+    level: 'gold',
+  },
+  'firefight/weekly-chief': {
+    level: 'bronce',
+  },
+  'firefight/all-nighter': {
+    level: 'gold',
   },
   'teaching/challenge-created': {
-    level: Levels.bronce,
+    level: 'bronce',
+  },
+  'teaching/learn-thursday': {
+    level: 'silver',
   },
   'teaching/movie-proposed': {
-    level: Levels.bronce,
+    level: 'bronce',
   },
 }
 
@@ -134,9 +157,15 @@ component.exports = {
   data: {
     badgesData: {},
     badgeTypes: {},
-    engineerBadges: []
+    displayPossibleBadges: false,
+    engineerBadges: [],
   },
   oninit: function() {
+    var component = this
+    this.on('togglePossibleBadges', function() {
+      component.set('displayPossibleBadges', !component.get('displayPossibleBadges'))
+    })
+
     this.set('badgesData', Object.keys(badgesConfig).reduce(function(previous, badgeId) {
       var area;
       var idParts = badgeId.split("/")

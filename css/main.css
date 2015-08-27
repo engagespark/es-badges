@@ -98,6 +98,10 @@ body {
     color: #222222;
 }
 
+.clickable {
+    cursor: pointer; cursor: hand;
+}
+
 
 /** Animations */
 @keyframes fadein {
@@ -189,19 +193,33 @@ http://emojisymbols.com/
 }
 
 /** Bronce badge: http://www.99colors.net/name/bronze */
+.badge.neutral {
+    background-color: #555;
+    border-color: white;
+    color: white;
+}
+
+/** Bronce badge: http://www.99colors.net/name/bronze */
 .badge.bronce {
     background-color: #CD7F32;
     border-color: #804000;
     color: #804000;
 }
 
-.badge.firefight {
-    -webkit-animation: fadein 3s; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadein 3s; /* Firefox < 16 */
-        -ms-animation: fadein 3s; /* Internet Explorer */
-         -o-animation: fadein 3s; /* Opera < 12.1 */
-            animation: fadein 3s;
+/** Gold badge: http://www.99colors.net/name/gold */
+.badge.gold {
+    background-color: #D4AF37;
+    border-color: #886800;
+    color: #886800;
 }
+
+/** Silver badge: http://www.99colors.net/name/silver */
+.badge.silver {
+    background-color: #C0C0C0;
+    border-color: #707070;
+    color: #707070;
+}
+
 
 .badge.challenge {
     font-size: 20px;
@@ -210,6 +228,29 @@ http://emojisymbols.com/
         -ms-animation: fadein 1s; /* Internet Explorer */
          -o-animation: fadein 1s; /* Opera < 12.1 */
             animation: fadein 1s;
+}
+
+.badge.community {
+    font-size: 35px;
+    -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 1s; /* Firefox < 16 */
+        -ms-animation: fadein 1s; /* Internet Explorer */
+         -o-animation: fadein 1s; /* Opera < 12.1 */
+            animation: fadein 1s;
+}
+
+.badge.community span {
+    line-height: 0px;
+    position: relative;
+    top: -5px;
+}
+
+.badge.firefight {
+    -webkit-animation: fadein 3s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 3s; /* Firefox < 16 */
+        -ms-animation: fadein 3s; /* Internet Explorer */
+         -o-animation: fadein 3s; /* Opera < 12.1 */
+            animation: fadein 3s;
 }
 
 .badge.teaching {
@@ -232,10 +273,40 @@ http://emojisymbols.com/
 }
 
 .legend .openbracket, .legend .closebracket {
-    color: #804000;
+    color: #5bc0de;
     font-size: 30px;
     font-weight: bold;
 }
+
+.possible {
+    border: solid 1px #5bc0de;
+    margin: 15px 0px;
+    padding: 5px 10px;
+}
+
+.possible h2 {
+    font-size: 15px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.possible h2 a {
+    color: #5bc0de;
+}
+
+.possible-badges {
+    padding: 10px 0px;
+}
+
+.possible-badges.hide {
+    display: none;
+}
+
+.possible-badges .badge {
+    margin-left: 30px;
+    margin-right: 5px;
+}
+
 
 /* ==============
     MOBILE: Menu
