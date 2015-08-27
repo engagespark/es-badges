@@ -1,7 +1,6 @@
 /*! HTML5 Boilerplate v5.0 | MIT License | http://h5bp.com/ */
 
 html {
-    color: #cccccc;
     font-size: 1em;
     line-height: 1.4;
 }
@@ -58,6 +57,7 @@ textarea {
 
 body {
     background: #222222;
+    color: #cccccc;
     font: 16px/26px Helvetica, Helvetica Neue, Arial;
 }
 
@@ -195,7 +195,16 @@ http://emojisymbols.com/
     color: #804000;
 }
 
-.badge.system {
+.badge.firefight {
+    -webkit-animation: fadein 3s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 3s; /* Firefox < 16 */
+        -ms-animation: fadein 3s; /* Internet Explorer */
+         -o-animation: fadein 3s; /* Opera < 12.1 */
+            animation: fadein 3s;
+}
+
+.badge.challenge {
+    font-size: 20px;
     -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadein 1s; /* Firefox < 16 */
         -ms-animation: fadein 1s; /* Internet Explorer */
@@ -210,6 +219,22 @@ http://emojisymbols.com/
         -ms-animation: fadein 2s; /* Internet Explorer */
          -o-animation: fadein 2s; /* Opera < 12.1 */
             animation: fadein 2s;
+}
+
+.legend {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.legend .badge {
+    margin-left: 30px;
+    margin-right: 5px;
+}
+
+.legend .openbracket, .legend .closebracket {
+    color: #804000;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 /* ==============

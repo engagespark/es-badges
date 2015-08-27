@@ -1,10 +1,22 @@
 <div>
+  {{#each badgeTypes:area}}
+  <div class="legend">
+      <div class="badge {{ area }} bronce">
+        <span title="{{ area }}">{{{ badgeTypes[area] }}}</span>
+      </div> <span class="openbracket">{</span> {{ area }} <span class="closebracket">}</span>
+  </div>
+  {{/each}}
+</div>
+
+<hr>
+
+<div>
   {{#each engineerBadges}}
   <div class="engineer">
     <div class="nickname">{{nick}}</div>
     {{#each badges}}
       <div class="badge {{ badgesData[id].area }} {{ badgesData[id].level }}">
-        <span title="{{ badgesData[id].id }}{{#if variant}} with {{ variant }} {{/if}}">{{{ badgesData[id].symbol }}}</span>
+        <span title="{{ badgesData[id].area }}: {{ badgesData[id].id }}{{#if variant}} with {{ variant }} {{/if}}">{{{ badgesData[id].symbol }}}</span>
       </div>
     {{/each}}
   </div>
@@ -16,60 +28,102 @@ var Levels = {
   bronce: 'bronce',
 }
 
-var area2symbol = {
-  'system': '#',  /* &#x258a for the box */
+var badgeTypesConfig = {
+  'challenge': '&#x2328;',
+  'firefight': '&#x1f525;', /* http://www.fileformat.info/info/unicode/char/1f525/index.htm */
   'teaching': '&#x1F393;',
 }
 
 var badgesConfig = {
-  'system/standard-streams': {
+  'firefight/weekly-chief': {
+    level: Levels.bronce,
+  },
+  'challenge/system-standard-streams': {
     level: Levels.bronce,
   },
   'teaching/challenge-created': {
+    level: Levels.bronce,
+  },
+  'teaching/movie-proposed': {
     level: Levels.bronce,
   },
 }
 
 engineersConfig = [
       {
+        nick: 'Alur',
+        badges: [
+          'firefight/weekly-chief',
+        ]
+      },
+      {
+        nick: 'Avner',
+        badges: [
+        ]
+      },
+      {
+        nick: 'Banx',
+        badges: [
+        ]
+      },
+      {
         nick: 'Diego',
         badges: [
-          'system/standard-streams:prolog',
-          'system/standard-streams:py2',
-          'system/standard-streams:py3',
+          'challenge/system-standard-streams:prolog',
+          'challenge/system-standard-streams:py2',
+          'challenge/system-standard-streams:py3',
+          'teaching/movie-proposed',
         ]
       },
       {
         nick: 'Él Mexicano',
         badges: [
-          'system/standard-streams:go',
-          'teaching/challenge-created',
+          'challenge/system-standard-streams:go',
+          'teaching/challenge-created:system-standard-streams',
+        ]
+      },
+      {
+        nick: 'Gerard',
+        badges: [
+        ]
+      },
+      {
+        nick: 'German',
+        badges: [
         ]
       },
       {
         nick: 'JayR',
         badges: [
-          'system/standard-streams:py2',
+          'firefight/weekly-chief',
+          'challenge/system-standard-streams:py2',
+        ]
+      },
+      {
+        nick: 'Kerwin',
+        badges: [
+          'teaching/movie-proposed',
         ]
       },
       {
         nick: 'Marconi',
         badges: [
-          'system/standard-streams:go',
-          'system/standard-streams:haskell',
+          'challenge/system-standard-streams:go',
+          'challenge/system-standard-streams:haskell',
         ]
       },
       {
         nick: 'murat',
         badges: [
-          'system/standard-streams:bash',
-          'system/standard-streams:commonlisp',
+          'challenge/system-standard-streams:bash',
+          'challenge/system-standard-streams:commonlisp',
+          'teaching/movie-proposed',
         ]
       },
       {
         nick: 'Ravi',
         badges: [
-          'system/standard-streams:perl',
+          'challenge/system-standard-streams:perl',
         ]
       },
 ]
@@ -79,6 +133,7 @@ component.exports = {
   twoway: false,
   data: {
     badgesData: {},
+    badgeTypes: {},
     engineerBadges: []
   },
   oninit: function() {
@@ -91,7 +146,7 @@ component.exports = {
         area: area,
         id: idParts[1],
         level: badgesConfig[badgeId].level,
-        symbol: area2symbol[area],
+        symbol: badgeTypesConfig[area],
       }
       return previous
     }, {}))
@@ -111,6 +166,7 @@ component.exports = {
       return right.badges.length - left.badges.length
     })
     this.set('engineerBadges', engineerBadges)
+    this.set('badgeTypes', badgeTypesConfig)
   }
 }
 </script>
